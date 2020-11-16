@@ -1,1 +1,0 @@
-{'Paulin': {'name': 'Paulin', 'points': ['jona', 'jona']}, 'Liebe': {'name': 'Liebe', 'points': ['l', 'sdf']}, 'Sport': {'name': 'Sport', 'points': ['Rennen']}}

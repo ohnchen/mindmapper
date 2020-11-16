@@ -16,11 +16,3 @@ class Subtopic():
     def __repr__(self):
         return f'Subtopic: \"{self.name.title()}\" in {self.color}'    
 
-class Point():
-    def __init__(self, name, color="black"):
-        self.name = name 
-        self.color = color
-
-    def __repr__(self):
-        return f'Point: \"{self.name.title()}\" in {self.color}'
-

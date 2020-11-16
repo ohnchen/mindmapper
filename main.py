@@ -35,12 +35,10 @@ def menu():
             load_data()
             menu()
         elif choice == 4:
-            read_topics()
-            delete()
+            delete_topic()
             read_topics()
             menu()
         elif choice == 5:
-            read_topics()
             save_exit()
             read_topics()
             menu()
@@ -111,7 +109,7 @@ def save_exit():
         os.system("clear")
         return
 
-def delete():
+def delete_topic():
     global subtopics, topic_name
     whatdata = input("What entry do you want to delete?  ")
     path = whatdata + ".txt"
@@ -135,7 +133,6 @@ def delete():
     return
 
 def read_topics():
-    global alltopics, topic_name
     f = open("topics.txt", "r")
     alltopics = f.read()
     f.close()
@@ -145,14 +142,19 @@ def read_topics():
     return topic_names
 
 def load_data():
+    global subtopics, topic_name
     whatdata = input("Which Topic do you want to load?  ")
     path = whatdata + ".txt"
     f = open(path, "r")
     data = f.read()
     f.close()
-
+    
+    dictionary = eval(data) 
     os.system("clear")
-    print(data)            
+    subtopics = dictionary
+    topic_name = whatdata 
+    topic_names.remove(topic_name)                
+    
 
 os.system("clear")  
 read_topics()

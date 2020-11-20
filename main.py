@@ -21,7 +21,7 @@ def menu():
     print("\n" + "#"*50 + "\n")
     print("These are ths topics that already exist: " + ", ".join(topic_names))
     print("What do you want to do?")
-    print("(1) Set topic. (2) Add Subtopic with Points. (3) Load Topic. (4) Delete Topic. (5) Save. (6) Exit.")
+    print("(1) Set topic. (2) Add Subtopic with Points. (3) Delete Subtopic with Points. (4) Load Topic. (5) Delete Topic. (6) Save. (7) Exit.")
     
     try:
         choice = int(input(""))
@@ -36,17 +36,24 @@ def menu():
                 print("First you have to define a topic!")
                 menu()
         elif choice == 3:
+            if topics != 0:
+                delete_subtopic()
+                menu()
+            else:
+                print("First you have to define a topic!")
+                menu()
+        elif choice == 4:
             load_data()
             menu()
-        elif choice == 4:
+        elif choice == 5:
             delete_topic()
             read_topics()
             menu()
-        elif choice == 5:
+        elif choice == 6:
             save_exit()
             read_topics()
             menu()
-        elif choice == 5:
+        elif choice == 7:
             return
         return 
     except Exception:
@@ -146,6 +153,14 @@ def read_topics():
         if i != "" and i not in topic_names:
             topic_names.append(i)
     return topic_names
+
+def delete_subtopic():
+    global subtopics, topic_name
+    if topic_name != "":
+        del_subtopic = input("Which subtopic do you want to delete?  ")
+        for key, value in subtopics.items():
+            if key == del_subtopic:   
+                subtopics.pop(del_subtopic)
 
 def load_data():
     global subtopics, topic_name, topics

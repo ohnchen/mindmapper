@@ -10,6 +10,9 @@ topic_name = ""
 topic_names = []
 
 def menu():
+    '''
+    Shows the mainmenu and gets called every time a action is completed! 
+    '''
     print("#"*50 + "\n")
     print(topic_name)
     for key, value in subtopics.items():
@@ -47,7 +50,7 @@ def menu():
         return 
     except Exception:
         print(f"[Error]  Not a valid option!")
-        time.sleep(2)
+        time.sleep(1)
         os.system("clear")
         menu() 
 
@@ -122,13 +125,16 @@ def delete_topic():
     for i in data_list:
         if i == whatdata or i == "":
             data_list.remove(i)
-            topic_names.remove(i) 
+            topic_names.remove(i)
     f = open("topics.txt", "w")
     f.write(" ".join(data_list))
     f.close()
     
     topic_name = ""
     subtopics = {}
+    topics -= 1
+    print(topics)
+    time.sleep(5)
     os.system("clear")
     return
 

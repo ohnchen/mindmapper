@@ -24,7 +24,7 @@ def menu():
     print("\n" + "#"*50 + "\n")
     print("These are ths topics that already exist: " + ", ".join(topic_names))
     print("What do you want to do?")
-    print("(1) Set topic. (2) Add Subtopic with Points. (3) Load Topic. (4) Delete Topic. (5) Save. (6) Save and Exit.")
+    print("(1) Set topic. (2) Add Subtopic with Points. (3) Delete Subtopic with Points. (4) Load Topic. (5) Delete Topic. (6) Save. (7) Exit.")
     
     try:
         choice = int(input(""))
@@ -32,21 +32,32 @@ def menu():
             set_topic()
             menu()
         elif choice == 2:
-            add_subtopic() 
-            menu()
+            if topics != 0:
+                add_subtopic() 
+                menu()
+            else:
+                print("First you have to define a topic!")
+                menu()
         elif choice == 3:
+            if topics != 0:
+                delete_subtopic()
+                menu()
+            else:
+                print("First you have to define a topic!")
+                menu()
+        elif choice == 4:
             load_data()
             menu()
-        elif choice == 4:
+        elif choice == 5:
             delete_topic()
             read_topics()
             menu()
-        elif choice == 5:
+        elif choice == 6:
             save_exit()
             read_topics()
             menu()
-        elif choice == 5:
-            save_exit()
+        elif choice == 7:
+            return
         return 
     except Exception:
         print(f"[Error]  Not a valid option!")
@@ -105,7 +116,8 @@ def save_exit():
         r.close
         
         topic_name = ""
-        subtopics = {} 
+        subtopics = {}
+        topics = 0
         os.system("clear")
         return
     else: 
@@ -113,7 +125,7 @@ def save_exit():
         return
 
 def delete_topic():
-    global subtopics, topic_name
+    global subtopics, topic_name, topics
     whatdata = input("What entry do you want to delete?  ")
     path = whatdata + ".txt"
     os.system("rm -r " + path)
@@ -132,9 +144,13 @@ def delete_topic():
     
     topic_name = ""
     subtopics = {}
+<<<<<<< HEAD
     topics -= 1
     print(topics)
     time.sleep(5)
+=======
+    topics = 0
+>>>>>>> fb1ad940eeb508a75db85dbc244a1de20aee09ce
     os.system("clear")
     return
 
@@ -147,14 +163,23 @@ def read_topics():
             topic_names.append(i)
     return topic_names
 
-def load_data():
+def delete_subtopic():
     global subtopics, topic_name
+    if topic_name != "":
+        del_subtopic = input("Which subtopic do you want to delete?  ")
+        for key, value in subtopics.items():
+            if key == del_subtopic:   
+                subtopics.pop(del_subtopic)
+
+def load_data():
+    global subtopics, topic_name, topics
     whatdata = input("Which Topic do you want to load?  ")
     path = whatdata + ".txt"
     f = open(path, "r")
     data = f.read()
     f.close()
     
+    topics += 1 
     dictionary = eval(data) 
     os.system("clear")
     subtopics = dictionary
